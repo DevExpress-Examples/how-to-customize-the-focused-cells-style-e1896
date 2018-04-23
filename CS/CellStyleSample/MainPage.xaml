@@ -1,0 +1,174 @@
+﻿<UserControl x:Class="CellStyleSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:grid="clr-namespace:DevExpress.AgDataGrid;assembly=DevExpress.AgDataGrid.v9.3"
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Resources>
+            <Style TargetType="grid:AgDataGridCell" x:Key="CustomCellStyle">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="grid:AgDataGridCell">
+                            <Grid Name="BackgroundElement">
+                                <Grid.Resources>
+                                    <SolidColorBrush Color="Black" x:Key="BlackSolidBrush"/>
+                                    <SolidColorBrush Color="White" x:Key="WhiteSolidBrush"/>
+                                    <SolidColorBrush Color="Transparent" x:Key="TransparentSolidBrush"/>
+                                    <SolidColorBrush Color="#FFdbe9f9" x:Key="BlueSolidBrush"/>
+                                    <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0"
+                                                 x:Key="DarkBlueGradientBrush">
+                                        <GradientStop Color="#FF71A4DE"/>
+                                        <GradientStop Color="#FF8CB5E4" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Resources>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="0"
+                                                           Storyboard.TargetName="ContentElement"
+                                                           Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                 Value="{StaticResource BlackSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Duration="0"
+                                                           Storyboard.TargetName="BackgroundElement"
+                                                           Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                   Value="{StaticResource TransparentSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                           Storyboard.TargetName="BackgroundElement"
+                                                           Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"  Value="{StaticResource BlueSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="UnselectedFocused">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="ElementFocusRect"
+                                                            Storyboard.TargetProperty="Opacity" Duration="00:00:0.00" To="1"/>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                            Storyboard.TargetName="ContentElement"
+                                                            Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BlackSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                           Storyboard.TargetName="ContentElement"
+                                                           Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WhiteSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                           Storyboard.TargetName="BackgroundElement" Storyboard.TargetProperty="BackGround">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource DarkBlueGradientBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="UnselectedFocusedRow">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                  Storyboard.TargetName="ContentElement"
+                                                  Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{StaticResource BlackSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                  Storyboard.TargetName="BackgroundElement" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TransparentSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="FocusedRow">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                   Storyboard.TargetName="ContentElement"
+                                                  Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <SolidColorBrush Color="Pink"/>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="FocusedRowFocused">
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="00:00:00.25"
+                                                  Storyboard.TargetName="ElementBorder"
+                                                  Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.2"/>
+                                                <DoubleAnimation Duration="00:00:00.25" Storyboard.TargetName="ElementBorder"
+                                                  Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.2"/>
+                                                <ColorAnimation Storyboard.TargetName="ElementBorderBackgroundBrush"
+                                                  Storyboard.TargetProperty="Color" Duration="00:00:0.00" To="#FFdbe9f9"/>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                  Storyboard.TargetName="ContentElement"
+                                                  Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{StaticResource BlackSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="UnselectedFocusedRowFocused">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                  Storyboard.TargetName="BackgroundElement" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{StaticResource DarkBlueGradientBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                  Storyboard.TargetName="ContentElement"
+                                                  Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource WhiteSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Edit">
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="ElementBorderBackgroundBrush"
+                                                  Storyboard.TargetProperty="Color" Duration="00:00:0.00" To="White"/>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:00:00"
+                                                  Storyboard.TargetName="ContentElement"
+                                                  Storyboard.TargetProperty="(ContentPresenter.Content).(Control.Foreground)">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{StaticResource BlackSolidBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="ElementBorder" CornerRadius="4" Margin="4" BorderThickness="0"
+                                                  RenderTransformOrigin="0.5, 0.5">
+                                    <Border.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Border.RenderTransform>
+                                    <Border.Background>
+                                        <SolidColorBrush x:Name="ElementBorderBackgroundBrush" Color="Transparent"/>
+                                    </Border.Background>
+                                    <ContentPresenter x:Name="ContentElement"
+					            Content="{TemplateBinding Content}"
+					            ContentTemplate="{TemplateBinding ContentTemplate}"
+					            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+					            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <Rectangle x:Name="ElementFocusRect" Grid.Column="1" Stroke="#FF999999"
+                                                  StrokeDashCap="Square" StrokeDashOffset="1" StrokeDashArray="1 3"
+                                                  StrokeEndLineCap="Flat" StrokeLineJoin="Miter" StrokeMiterLimit="0" StrokeStartLineCap="Flat"
+                                                  StrokeThickness="1" Opacity="0"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        
+        <grid:AgDataGrid x:Name="grid" CellStyle="{StaticResource CustomCellStyle}"/>
+    </Grid>
+</UserControl>
