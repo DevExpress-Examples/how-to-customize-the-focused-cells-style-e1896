@@ -1,3 +1,9 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [MainPage.xaml](./CS/CellStyleSample/MainPage.xaml) (VB: [MainPage.xaml.vb](./VB/CellStyleSample/MainPage.xaml.vb))
+* [MainPage.xaml.cs](./CS/CellStyleSample/MainPage.xaml.cs) (VB: [MainPage.xaml.vb](./VB/CellStyleSample/MainPage.xaml.vb))
+<!-- default file list end -->
 # How to Customize the Focused Cell's Style
 
 
